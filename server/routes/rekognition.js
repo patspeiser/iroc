@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Rekog = require('../js/rekog');
 const rekog = new Rekog();
+
 module.exports = router;
 
 router.get('/', function(req, res, next){

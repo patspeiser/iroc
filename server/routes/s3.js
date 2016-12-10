@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const Rekog = require('../js/rekog');
 const rekog = new Rekog();
+const Asset = require('../db').models.Asset;
+const Bucket = require('../db').models.Bucket;
 
 module.exports = router;
 

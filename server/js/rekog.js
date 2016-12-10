@@ -18,6 +18,11 @@ const router = require('express').Router();
 const request = require('request');
 const Promise = require('bluebird');
 
+// database models
+const Asset = require('../db').models.Asset;
+const Bucket = require('../db').models.Bucket;
+const Label = require('../db').models.Label;
+
 //////////////////////////////////////
 // end config                      //
 ////////////////////////////////////
