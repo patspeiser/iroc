@@ -1,6 +1,7 @@
-var AWS = require('aws-sdk');
-var uuid = require('node-uuid');
-var fs = require('fs');
+const AWS = require('aws-sdk');
+const uuid = require('node-uuid');
+const fs = require('fs');
+const s3 = new AWS.S3();
 //AWS.config.update({region: 'us-east-1'});
 
 //specify version so it doesn't get fckd up and try to pick on its own
@@ -8,20 +9,19 @@ AWS.config.apiVersions = {
   rekognition: '2016-06-27',
 };
 
-//new s3 instance
-var s3 = new AWS.S3();
-
-//my bucket
+//my bucket i want to create / use
 var bucketName = 'rekog-assets';
 
 //////
-// add stuff here to check if bucket exists first
+// TODO: add stuff here to check if bucket exists first
+// instead of relying on it to check on its own
 /////
 
 //create bucket
 s3.createBucket({Bucket: bucketName}, function(){
 	//what we're gonna upload to bucket
-	var file = '../assets/horses.jpg';
+	var file = '../assets/runners.jpg';
+	var keyName = 'runners';
 	var params = {
 		Bucket: bucketName, 
 		Key: keyName, 
@@ -36,4 +36,4 @@ s3.createBucket({Bucket: bucketName}, function(){
   });
 });
 
-
+//rejoice. . . . 
