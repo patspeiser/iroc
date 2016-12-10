@@ -1,5 +1,5 @@
 {
-  "name": "firebird",
+  "name": "iroc",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,6 +12,7 @@
   "dependencies": {
     "angular": "^1.5.9",
     "angular-ui-router": "^0.3.2",
+    "aws-sdk": "^2.7.13",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
     "chalk": "^1.1.3",
