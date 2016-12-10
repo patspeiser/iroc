@@ -35,5 +35,3 @@ s3.createBucket({Bucket: bucketName}, function(){
       console.log("Successfully uploaded data to " + bucketName + "/" + keyName);
   });
 });
-
-//rejoice. . . . 
