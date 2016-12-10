@@ -12,26 +12,25 @@ AWS.config.apiVersions = {
 };
 
 //new s3 instance
-const s3 = new AWS.S3();
+// const s3 = new AWS.S3();
 
 //my bucket
 var bucketName = 'rekog-assets';
 
-var createRekogObject = 
-function(asset, bucket, maxLabels){
+var createRekogObject = function(asset){
 	var params = {
 		Image: {
 			S3Object: {
-				Bucket: bucket,
-				Name: 'horses'
+				Bucket: asset.bucket,
+				Name: asset.image
 			}
 		},
-		MaxLabels: maxLabels,
+		MaxLabels: asset.maxLabels || 100,
 	};
 	return new Promise(function(resolve, reject) {
 		rekognition.detectLabels(params, function(err, data){
 			if (err) {
-				console.log(err);
+				reject(err);
 			} else {
 				resolve(data);
 			}
@@ -44,7 +43,7 @@ router.get('/', function(req, res, next){
 });
 
 router.post('/', function(req, res, next){
-	createRekogObject(req.body.asset, req.body.bucket, req.body.maxLabels)
+	createRekogObject(req.body)
 	.then(function(rekogs){
 		res.send(rekogs);
 	})
