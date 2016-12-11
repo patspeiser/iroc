@@ -33,8 +33,8 @@ API endpoint info:
 - GET /api/buckets/all/assets/labels
 
 #Rekognitions
-- POST /api/rekognition/:assetId   => **__req.body {image: imageName, bucket: bucketName, maxLabels: maxLabels}__**
+- POST /api/rekognition/:assetId   => **_req.body {image: imageName, bucket: bucketName, maxLabels: maxLabels}_**
 - GET /api/rekognition/:id
 
 #S3
-- POST /api/s3/  => **__req.body {bucket: bucket, name: name, url: url} __**
+- POST /api/s3/  => **_req.body {bucket: bucket, name: name, url: url}_**
