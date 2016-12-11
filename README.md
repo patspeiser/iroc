@@ -13,21 +13,21 @@ npm run start:dev (to start the server if needed) locally will run http://localh
 API endpoint info:
 
 #Assets:
--/api/assets  
--/api/assets/:id
--/api/assets/:id/labels
--/api/assets/all/labels
+- /api/assets  
+- /api/assets/:id
+- /api/assets/:id/labels
+- /api/assets/all/labels
 
 #Labels: 
--/api/labels
--/api/labels/:id
--/api/labels/:id/assets
--/api/labels/all/assets
+- /api/labels
+- /api/labels/:id
+- /api/labels/:id/assets
+- /api/labels/all/assets
 
 #Buckets
--/api/buckets
--/api/buckets/:id
--/api/buckets/:id/assets
--/api/buckets/:id/assets/labels
--/api/buckets/all/assets
--/api/buckets/all/assets/labels
+- /api/buckets
+- /api/buckets/:id
+- /api/buckets/:id/assets
+- /api/buckets/:id/assets/labels
+- /api/buckets/all/assets
+- /api/buckets/all/assets/labels
