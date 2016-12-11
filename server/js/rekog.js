@@ -92,10 +92,10 @@ Rekog.prototype.uploadToS3 = function(asset){
 					else
 						//this is what is returned if the request is successful
 						resolve({
-							file: asset.url,
-							fileName: asset.name,
+							image: asset.url,
+							name: asset.name,
 							bucket: asset.bucket,
-							s3Id: data.ETag
+							awsId: data.ETag
 						});
 				});
 			});
