@@ -19,7 +19,6 @@ router.post('/:assetId', function(req, res, next){
 			var label = _.transform(label, function(result, val, key){
 				result[key.toLowerCase()] = val
 			});
-			console.log(label);
 			Label.create({
 				name: label.name,
 				confidence: label.confidence,

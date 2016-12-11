@@ -1,12 +1,12 @@
 const Sequelize = require('Sequelize');
 const db = new Sequelize(process.env.DATABASE_URL, {});
 
-// const Bucket = db.define('bucket', {
-// 	name: {
-// 		type: Sequelize.STRING,
-// 		allowNull: false
-// 	}
-// });
+const Bucket = db.define('bucket', {
+	name: {
+		type: Sequelize.STRING,
+		allowNull: false
+	}
+});
 
 const Asset = db.define('asset', {
 	name: {
@@ -34,8 +34,8 @@ const Label = db.define('label', {
 	}
 });
 
-// Bucket.hasMany(Asset);
-// Asset.belongsTo(Bucket);
+Bucket.hasMany(Asset);
+Asset.belongsTo(Bucket);
 
 Asset.hasMany(Label);
 Label.belongsTo(Asset);
@@ -44,7 +44,7 @@ module.exports = {
 	db: db,
 	models: {
 		Asset: Asset,
-		Label: Label
-		// Bucket: Bucket
+		Label: Label,
+		Bucket: Bucket
 	}
-}
+};

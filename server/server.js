@@ -4,6 +4,7 @@ const port = process.env.PORT || 3000;
 const _db = require('./db').db;
 
 var SYNC = false; 
+// var SYNC = true; 
 
 if (SYNC){
 	_db.sync({force: true})
