@@ -57,7 +57,6 @@ Rekog.prototype.createRekogObject = function(asset){
 				if (err) {
 					reject(err);
 				} else {
-					socket.emit('rekogSuccess');
 					resolve(data);
 				}
 			});

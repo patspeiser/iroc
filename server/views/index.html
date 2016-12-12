@@ -1,9 +1,12 @@
 <html>
 	<head>
-		<link rel='stylesheet' src='bootstrap/dist/css/bootstrap.css'/>
+		<link rel='stylesheet' href='/bootstrap/dist/css/bootstrap.css'/>
+		<script src="/socket.io/socket.io.js"></script>
 		<script src='/angular/angular.js'></script>
 		<script src='/angular-ui-router/release/angular-ui-router.js'></script>
 		<script src='/app.js'></script>
+		<script src='/home/home.controller.js'></script>
+		<script src='/home/HomeService.js'></script>
 	</head>
 	<body ng-app='app'>
 		<ui-view></ui-view>

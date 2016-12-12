@@ -1,5 +1,17 @@
-<div class='col-md-3'></div>
-<div class='col-md-6'></div>
-	<img ng-src='/public/uroc.jpg'> -->
+<div class='well'>
+	<form name='form'>
+		<table class='table'>
+			<tr> 
+				<td><input required type='text' ng-model='name' class='form-control' placeholder='name this image'/></td>
+			</tr>
+			<tr>
+				<td><input required type='text' ng-model='url' class='form-control' placeholder='image URL (<5mb)'/></td>
+				<td><button ng-disabled='form.$invalid' ng-click='upload()' class='btn btn-primary pull-right'>Upload</button></td>
+			</tr>
+			<tr> 
+				<td colspan='2'><img ng-if='image' ng-src='{{imageUrl}}'/></td>
+			</tr>
+		</table>
+	</form>
+	<li ng-if='rekogs' ng-repeat='rekog in rekogs'>{{rekog.Confidence}} - {{rekog.Name}}</li> 
 </div>
-<div class='col-md-3'></div>

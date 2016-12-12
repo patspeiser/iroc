@@ -6,6 +6,7 @@ angular.module('app')
 		.state('Home', {
 			url: '/',
 			templateUrl: './home/home.html',
+			controller: 'HomeCtrl'
 		});
 });
 
