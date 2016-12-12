@@ -17,6 +17,7 @@ const rekognition = new AWS.Rekognition();
 const router = require('express').Router();
 const request = require('request');
 const Promise = require('bluebird');
+const socket = require('socket.io-client')(process.env.SOCKET_SERVER || 'http://localhost:3000');
 
 // database models
 const Asset = require('../db').models.Asset;
@@ -36,25 +37,30 @@ function Rekog(){}
 // asset => { bucket: s3Bucket, image: imageNameOnS3, maxLabels: numberOfResults }
 /////////////
 Rekog.prototype.createRekogObject = function(asset){
-	// the image is an s3 object so tell it how to find it
-	var params = {
-		Image: {
-			S3Object: {
-				Bucket: asset.bucket,
-				Name: asset.image
-			}
-		},
-		MaxLabels: asset.maxLabels || 100,
-	};
+	return Bucket.findById(asset.bucketId)
+	.then(function(bucket){
+		console.log(asset.image, bucket.name);
+		// the image is an s3 object so tell it how to find it
+		var params = {
+			Image: {
+				S3Object: {
+					Bucket: bucket.name,
+					Name: asset.name
+				}
+			},
+			MaxLabels: asset.maxLabels || 100,
+		};
 
-	// the actual API request to amazon. returns a promise so we can use .then() 
-	return new Promise(function(resolve, reject) {
-		rekognition.detectLabels(params, function(err, data){
-			if (err) {
-				reject(err);
-			} else {
-				resolve(data);
-			}
+		// the actual API request to amazon. returns a promise so we can use .then() 
+		return new Promise(function(resolve, reject) {
+			rekognition.detectLabels(params, function(err, data){
+				if (err) {
+					reject(err);
+				} else {
+					socket.emit('rekogSuccess');
+					resolve(data);
+				}
+			});
 		});
 	});
 };
@@ -87,18 +93,40 @@ Rekog.prototype.uploadToS3 = function(asset){
 					};
 					//upload to bucket
 					s3.putObject(params, function(err, data) {
-						if (err)
+						if (err){
 							reject(err, err);
-						else
+						} else {
+							var payload = {
+								image: asset.url,
+								name: asset.name,
+								bucket: asset.bucket,
+								awsId: data.ETag
+							};
 							//this is what is returned if the request is successful
-						resolve({
-							image: asset.url,
-							name: asset.name,
-							bucket: asset.bucket,
-							awsId: data.ETag
-						});
+							resolve(payload);
+						}
 					});
 				});
 			});
 		});
 };
+
+///////////////////////////
+// get bucket contents   //
+//////////////////////////
+Rekog.prototype.getBucketContents = function(bucket){
+	console.log(bucket);
+	return new Promise(function(resolve, reject){
+		var params = {
+			Bucket: bucket
+		};
+		s3.listObjects(params, function(err, data){
+			if (err) {
+				reject(err);
+			} else {
+				resolve(data);
+			}
+		});
+	});
+};
+
