@@ -1,10 +1,7 @@
 const env = process.env.NODE_ENV || 'dev_aws';
 const config = require('../../config')[env];
 const Sequelize = require('Sequelize');
-const db = new Sequelize(config.database.db, config.database.user, config.database.password, {
-	host: config.database.host,
-	dialect: 'postgres'
-});
+const db = new Sequelize();
 
 const Bucket = db.define('bucket', {
 	name: {
