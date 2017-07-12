@@ -23,6 +23,7 @@ router.get('/:bucketName/contents', function(req, res, next){
 router.post('/', function(req, res, next){
 	rekog.uploadToS3(req.body)
 	.then(function(result){
+		console.log(result)
 		Bucket.findOrCreate({
 			where: {
 				name: req.body.bucket
