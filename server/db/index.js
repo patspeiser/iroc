@@ -1,6 +1,6 @@
 //const env = process.env.NODE_ENV || 'dev_aws';
 //const config = require('../../config')[env];
-const Sequelize = require('Sequelize');
+const Sequelize = require('sequelize');
 const db = new Sequelize(process.env.DATABASE_URL)
 
 const Bucket = db.define('bucket', {
