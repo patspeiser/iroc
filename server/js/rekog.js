@@ -78,7 +78,7 @@ Rekog.prototype.uploadToS3 = function(asset){
 			}, function(err, res, body) {
 				//once i've got the buffer (body) i can send to s3 below
 				if (err)
-					console.log(err);
+					console.log('uploadToS3 error', err);
 
 				//TODO: add check for image size. must be <5mb
 
@@ -93,6 +93,7 @@ Rekog.prototype.uploadToS3 = function(asset){
 					//upload to bucket
 					s3.putObject(params, function(err, data) {
 						if (err){
+							console.log(err);
 							reject(err, err);
 						} else {
 							var payload = {
