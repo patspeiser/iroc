@@ -21,8 +21,10 @@ router.get('/:bucketName/contents', function(req, res, next){
 });
 
 router.post('/', function(req, res, next){
+	console.log('s31');
 	rekog.uploadToS3(req.body)
 	.then(function(result){
+		console.log('s3 2');
 		console.log(result)
 		Bucket.findOrCreate({
 			where: {
@@ -42,7 +44,10 @@ router.post('/', function(req, res, next){
 			});
 		});
 	})
-	.catch(next);
+	.catch(function(){
+		console.log('################');
+		next
+	});
 });
 
 
