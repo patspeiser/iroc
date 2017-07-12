@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "DATABASE_URL=postgres://localhost/iroc node server/server.js"
+    "start": "DATABASE_URL=postgres://localhost/rekog node server/server.js"
   },
   "author": "",
   "license": "ISC",
