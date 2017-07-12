@@ -70,6 +70,7 @@ Rekog.prototype.createRekogObject = function(asset){
 ///////////
 Rekog.prototype.uploadToS3 = function(asset){
 		//returns a promise
+		console.log(asset);
 		return new Promise(function(resolve, reject){
 			//fetches image from req.body.url and converts to buffer
 			request({
