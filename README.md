@@ -8,7 +8,7 @@ can toggle the SYNC var in the server.js file to seed the db tables. set it back
 
 npm install
 
-npm run start:dev (to start the server if needed) locally will run http://localhost:3000/
+npm run start (to start the server if needed) locally will run http://localhost:3000/
 
 API endpoint info:
 
