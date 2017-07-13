@@ -31,6 +31,7 @@ io.on('connection', function(socket){
 });
 
 if (SYNC){
+	console.log('SYNCING');
 	_db.sync({force: true})
 		.then(function(){
 			server.listen(port, function(){
