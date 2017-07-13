@@ -3,7 +3,7 @@ const Rekog = require('../js/rekog');
 const rekog = new Rekog();
 const Asset = require('../db').models.Asset;
 const Bucket = require('../db').models.Bucket;
-const socket = require('socket.io-client')(process.env.SOCKET_SERVER || 'http://localhost:3000');
+const socket = require('socket.io-client')(process.env.SOCKET_SERVER);
 const server = require('../server');
 
 module.exports = router;
@@ -39,6 +39,7 @@ router.post('/', function(req, res, next){
 			.then(function(asset){
 				console.log('success... emitting signal');
 				socket.emit('s3UploadSuccess', asset);
+				console.log('DID EMIT SIGNAL');
 				res.send(asset);
 			});
 		});
