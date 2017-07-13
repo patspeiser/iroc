@@ -46,12 +46,10 @@ Rekog.prototype.createRekogObject = function(asset){
 			Image: {
 				S3Object: {
 					Bucket: bucket.name,
-					Name: asset.name
-				},
+					Name: asset.name,
+				}
 			},
 			MaxLabels: asset.maxLabels || 100,
-			Key: process.env.AWS_ACCESS_KEY_ID,
-			Secret: process.env.AWS_SECRET_ACCESS_KEY
 		};
 
 		// the actual API request to amazon. returns a promise so we can use .then() 
