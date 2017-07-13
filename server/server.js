@@ -16,31 +16,29 @@ if (SYNC){
 			server.listen(port, function(){
 				console.log('listening on ' + port);
 			});
-
-
+			//socket server event handling here
+			io.on('connection', function(socket){
+			socket.on('s3UploadSuccess', function(payload){
+				rekog.createRekogObject(payload)
+				.then(function(rekogs){
+					io.sockets.emit('rekogSuccess', rekogs);
+					rekogs.Labels.forEach(function(label){
+						var label = _.transform(label, function(result, val, key){
+							result[key.toLowerCase()] = val;
+						});
+					Label.create({
+						name: label.name,
+						confidence: label.confidence,
+						assetId: payload.id
+					});
+					});
+				});
+			});
 		});
+	});
 } else {
 	server.listen(port, function(){
 		console.log('listening on ' + port);
 	});
 }
 
-//socket server event handling here
-io.on('connection', function(socket){
-	socket.on('s3UploadSuccess', function(payload){
-		rekog.createRekogObject(payload)
-		.then(function(rekogs){
-			io.sockets.emit('rekogSuccess', rekogs);
-			rekogs.Labels.forEach(function(label){
-				var label = _.transform(label, function(result, val, key){
-					result[key.toLowerCase()] = val;
-				});
-			Label.create({
-				name: label.name,
-				confidence: label.confidence,
-				assetId: payload.id
-			});
-			});
-		});
-	});
-});

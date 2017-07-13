@@ -70,22 +70,16 @@ Rekog.prototype.createRekogObject = function(asset){
 ///////////
 Rekog.prototype.uploadToS3 = function(asset){
 		//returns a promise
-		console.log('###################1');
 		return new Promise(function(resolve, reject){
-			console.log('###################2');
 			//fetches image from req.body.url and converts to buffer
 			request({
 				url: asset.url,
 				encoding: null
 			}, function(err, res, body) {
-				console.log('############3');
 				//once i've got the buffer (body) i can send to s3 below
 				if (err)
-					console.log('############4');
-					console.log('uploadToS3 error', err);
 
 				//TODO: add check for image size. must be <5mb
-
 				console.log('############5');
 				//create bucket
 				s3.createBucket({Bucket: asset.bucket}, function(){

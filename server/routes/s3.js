@@ -37,7 +37,7 @@ router.post('/', function(req, res, next){
 				bucketId: bucket[0].id
 			})
 			.then(function(asset){
-				console.log('success... emitting signal', asset);
+				console.log('success... emitting signal');
 				socket.emit('s3UploadSuccess', asset);
 				res.send(asset);
 			});
