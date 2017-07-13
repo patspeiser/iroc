@@ -13,9 +13,12 @@ var SYNC = process.env.SYNC || false;
 //socket server event handling here
 io.on('connection', function(socket){
 	socket.on('s3UploadSuccess', function(payload){
+		console.log('got payload', payload);
 		rekog.createRekogObject(payload)
 		.then(function(rekogs){
+			console.log('got rekognition terms');
 			io.sockets.emit('rekogSuccess', rekogs);
+			console.log('emitting rekogs', rekogs);
 			rekogs.Labels.forEach(function(label){
 				var label = _.transform(label, function(result, val, key){
 					result[key.toLowerCase()] = val;

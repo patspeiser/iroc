@@ -40,7 +40,6 @@ function Rekog(){}
 Rekog.prototype.createRekogObject = function(asset){
 	return Bucket.findById(asset.bucketId)
 	.then(function(bucket){
-		console.log(asset.image, bucket.name);
 		// the image is an s3 object so tell it how to find it
 		var params = {
 			Image: {
