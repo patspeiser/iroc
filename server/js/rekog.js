@@ -10,6 +10,7 @@ AWS.config.apiVersions = {
 	rekognition: '2016-06-27',
 };
 
+
 // using rekognition endpoint so make a new instance of it
 const rekognition = new AWS.Rekognition();
 
@@ -45,7 +46,9 @@ Rekog.prototype.createRekogObject = function(asset){
 			Image: {
 				S3Object: {
 					Bucket: bucket.name,
-					Name: asset.name
+					Name: asset.name,
+					Key: process.env.AWS_ACCESS_KEY_ID,
+					Secret: process.env.AWS_SECRET_ACCESS_KEY
 				}
 			},
 			MaxLabels: asset.maxLabels || 100,
@@ -70,19 +73,23 @@ Rekog.prototype.createRekogObject = function(asset){
 ///////////
 Rekog.prototype.uploadToS3 = function(asset){
 		//returns a promise
-		console.log(asset);
+		console.log('###################1');
 		return new Promise(function(resolve, reject){
+			console.log('###################2');
 			//fetches image from req.body.url and converts to buffer
 			request({
 				url: asset.url,
 				encoding: null
 			}, function(err, res, body) {
+				console.log('############3');
 				//once i've got the buffer (body) i can send to s3 below
 				if (err)
+					console.log('############4');
 					console.log('uploadToS3 error', err);
 
 				//TODO: add check for image size. must be <5mb
 
+				console.log('############5');
 				//create bucket
 				s3.createBucket({Bucket: asset.bucket}, function(){
 					//what we're gonna upload to bucket
